@@ -1,28 +1,68 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tugas Praktikum</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Praktikum jQuery & AJAX</title>
+
+  <!-- Tambahkan jQuery dari CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    #box { width: 200px; height: 100px; background: skyblue; margin-bottom: 20px; text-align:center; line-height:100px; border-radius:10px; }
+    button { margin: 5px; }
+  </style>
 </head>
 <body>
 
-    <header>
-        <h1>Tugas Praktikum Scrool Mohamad Agip Jenaro</h1>
-    </header>
+  <h2>💡 Praktikum jQuery & AJAX</h2>
 
-    <div class="content">
-        <p>Scrool Bawah</p>
-        <div style="height: 2500px; background-color: hsl(0, 0%, 94%); padding: 20px;">
-            <p>Praktikum Scrool</p>
-        </div>
-    </div>
+  <div id="box">Kotak</div>
+  <button id="hide">Sembunyikan</button>
+  <button id="show">Tampilkan</button>
+  <button id="toggle">Toggle</button>
+  <button id="warna">Ubah Warna</button>
+  <hr>
 
-    <button onclick="topFunction()" id="myBtn" title="Kembali ke Atas">
-        &#9650;
-    </button>
+  <h3>AJAX Contoh (Ambil Data dari file JSON)</h3>
+  <button id="loadData">Ambil Data</button>
+  <div id="result"></div>
 
-    <script src="script.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Hide dan Show efek
+      $("#hide").click(function() {
+        $("#box").hide(500);
+      });
+
+      $("#show").click(function() {
+        $("#box").show(500);
+      });
+
+      $("#toggle").click(function() {
+        $("#box").toggle(500);
+      });
+
+      $("#warna").click(function() {
+        $("#box").css("background", "lightgreen");
+      });
+
+      // AJAX load data dari file eksternal
+      $("#loadData").click(function() {
+        $.ajax({
+          url: "data.json",
+          type: "GET",
+          dataType: "json",
+          success: function(data) {
+            $("#result").html("<p>Nama: " + data.nama + "<br>Umur: " + data.umur + "</p>");
+          },
+          error: function() {
+            $("#result").html("<p style='color:red;'>Gagal memuat data!</p>");
+          }
+        });
+      });
+    });
+  </script>
 </body>
 </html>
